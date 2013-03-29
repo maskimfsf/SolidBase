@@ -1,7 +1,7 @@
+WebContent/WEB-INF/classes/*
 .idea
 .settings
 target
 .classpath
 .project
 release.properties
-WEB-INF\classes\*
