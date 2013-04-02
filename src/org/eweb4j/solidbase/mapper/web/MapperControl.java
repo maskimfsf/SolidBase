@@ -9,11 +9,13 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
 import org.eweb4j.cache.Props;
 import org.eweb4j.component.dwz.DWZ;
 import org.eweb4j.component.dwz.DWZCons;
 import org.eweb4j.ioc.IOC;
+import org.eweb4j.mvc.MVC;
 import org.eweb4j.mvc.config.MVCConfigConstant;
 import org.eweb4j.mvc.view.DataAssemUtil;
 import org.eweb4j.mvc.view.DivPageComp;
@@ -21,6 +23,7 @@ import org.eweb4j.mvc.view.ListPage;
 import org.eweb4j.mvc.view.PageMod;
 import org.eweb4j.mvc.view.SearchForm;
 import org.eweb4j.orm.Db;
+import org.eweb4j.solidbase.area.model.Area;
 import org.eweb4j.solidbase.files.model.FilesException;
 import org.eweb4j.solidbase.files.model.FilesService;
 import org.eweb4j.solidbase.files.model.FilesServiceImpl;
@@ -91,6 +94,31 @@ public class MapperControl {
 		}
 		
 		return "";
+	}
+	
+	@Path("/canvas")
+	public String image(@QueryParam("savePath") String savePath){
+		MVC.ctx().getModel().put("savePath", savePath);
+		return "jsp:mapper/view/canvas.jsp";
+	}
+	
+	@Path("/{id}/draw")
+	public String doDraw(@PathParam("id")Long id){
+		try {
+			Mapper mapper = mapperService.get(id);
+			MVC.ctx().getModel().put("mapper", mapper);
+			MVC.ctx().getModel().put("colors", Area.allColors());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "jsp:mapper/view/draw.jsp";
+	}
+	
+	@Path("/{id}/edit_draw")
+	public String editDraw(@PathParam("id")Long id){
+		MVC.ctx().getModel().put("id", id);
+		return "jsp:mapper/view/edit_draw.jsp";
 	}
 	
 	@Path("/list")

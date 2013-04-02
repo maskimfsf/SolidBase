@@ -5,13 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.eweb4j.solidbase.files.model.Files;
 
 /**
  * TODO
@@ -42,14 +37,10 @@ public class FileCate {
 	@Id
 	private Long id;
 	
-	private String name;// 类别名称
-	
 	@Column(name="media_type")
 	private String mediaType;// 媒体类型，image|file|text|flash
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="thumb_id")
-	private Files thumb;// 类别缩略图
+	private String name;// 类别名称
 	
 	private int sort;// 类别排序
 	
@@ -67,14 +58,6 @@ public class FileCate {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Files getThumb() {
-		return thumb;
-	}
-
-	public void setThumb(Files thumb) {
-		this.thumb = thumb;
 	}
 
 	public int getSort() {

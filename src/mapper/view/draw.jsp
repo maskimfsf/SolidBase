@@ -58,10 +58,10 @@
 		</style>		
 	</head>
 	<body>
-		<form action="${BaseURL}area/${area.id}/" method="POST" onsubmit="return validateCallback(this)">
-			<input type="hidden" name="_method" value="put" />
+		<form action="${BaseURL}area/" method="POST" onsubmit="return validateCallback(this)">
+			<input type="hidden" name="area.mapper.id" value="${mapper.id}" />
 			<div class="ui-layout-center">
-				<iframe name="area_image_iframe" width="99%" height="99%" src="${BaseURL}area/canvas?savePath=${area.mapper.image.savePath}"></iframe>
+				<iframe name="area_image_iframe" width="99%" height="99%" src="${BaseURL}area/canvas?savePath=${mapper.image.savePath}"></iframe>
 				<!--div id="user_image">
 					<img id="my_image" src="${ImageBaseURL}/${area.mapper.image.savePath}" />
 					<div id="myCanvas"></div>
@@ -70,39 +70,37 @@
 			<div class="ui-layout-east">
 				<div class="unit">
 					<label>线条颜色：</label>
-					<!--span id="area_color" value="${area.color}" style="padding:3px 10px; background:${area.color}">${area.color}</span-->
 					<select id="color_selector" name="area.color" class="required">
 						<option value="">请选择</option>
 						<c:forEach var="item" items="${colors}">
-							<option value="${item}" style="color:${item}; font-weight:bold;"
-								<c:if test="${item == area.color}">selected="selected"</c:if></option>${item}</option>
+							<option value="${item}" style="color:${item}; font-weight:bold;">${item}</option>
 						</c:forEach>
 					</select>
 				</div>
 				
 				<div class="unit">
 					<label>所属映射：</label>
-					<input class="input" disabled="disabled" size="40" value="${area.mapper.name}" />
+					<input class="input" disabled="disabled" size="40" value="${mapper.name}" />
 				</div>
 				
 				<div class="unit">
 					<label>映射描述：</label>
-					<textarea disabled="disabled" name="area.description" rows="5">${area.mapper.description}</textarea>
+					<textarea disabled="disabled" name="area.description" rows="5">${mapper.description}</textarea>
 				</div>
 				
 				<div class="unit">
 					<label>热点名称：</label>
-					<input class="input" name="area.name" size="40" value="${area.name}" />
+					<input class="input" name="area.name" size="40" />
 				</div>
                 
 				<div class="unit">
                     <label>热点描述</label>
-                    <textarea name="area.description" rows="5">${area.description}</textarea>
+                    <textarea name="area.description" rows="5"></textarea>
                 </div>
                 
                 <div class="unit">
                     <label>热点坐标</label>
-                    <textarea id="area_coords" class="output-code-textarea" name="area.coords" rows="10">${area.coords}</textarea>
+                    <textarea id="area_coords" class="output-code-textarea" name="area.coords" rows="10"></textarea>
                 </div>
                 
                 <div class="unit" style="text-align:center; padding:20px; font-size:14px;">
@@ -128,9 +126,6 @@
 							);
 							return false;
 						}
-						$("#save_area").click(function(){
-							
-						});
 					</script>
 				</div>
 			</div>

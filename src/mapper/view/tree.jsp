@@ -8,15 +8,14 @@
 		<ul class="tree treeFolder expand">
 			<c:forEach var="mapper" items="${mappers}">
 			<li><a href="#">${mapper.name}</a>
-			<c:if test="${mapper.areas != null}">
 			<ul>
+				<li><a target="navTab" rel="new_drawhotspot_${mapper.id}" external="true" reloadflag="1" href="${BaseURL}mapper/${mapper.id}/edit_draw">【添加新热点】</a></li>
 				<c:forEach var="area" items="${mapper.areas}">
 				<li>
 					<a target="navTab" rel="drawhotspot_${area.id}" external="true" reloadflag="1" href="${BaseURL}area/${area.id}/edit_draw">${area.name}</a>
 				</li>
 				</c:forEach>
 			</ul>
-			</c:if>
 			</li>
 			</c:forEach>
 		</ul>

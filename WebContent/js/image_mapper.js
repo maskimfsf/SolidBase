@@ -130,10 +130,11 @@ $(document).ready(function() {
 			// add the undone values to an array
 			undone_x_draws.push(undone_x_draw);
 			undone_y_draws.push(undone_y_draw);
-			
 			// redraw the ploygon line
 			$('#myCanvas div').each(function(){
-				if ($(this).attr('style').match(color)) { $(this).remove(); };
+//				if ($(this).attr('style').match(color)) { 
+					$(this).remove(); 
+//				};
 			});
 			
 			if (x_draw_values && x_draw_values.length > 0
@@ -225,7 +226,12 @@ $(document).ready(function() {
 	$.ctrl('Z', function() { $(window.parent.document).find('#undo').trigger("click"); });
 	$.ctrl('Y', function() { $(window.parent.document).find('#redo').trigger("click"); });
 
-	color = $(window.parent.document).find("#area_color").attr("value");
+	var _color = $(window.parent.document).find("#color_selector").val();
+	if (_color)
+		color = _color;
+	$(window.parent.document).find("#color_selector").change(function(){
+		color = $(this).val();
+	});
 	function _init_cavas(image_id, area_coords){
 		if (!area_coords || area_coords.length == 0)
 			return false;

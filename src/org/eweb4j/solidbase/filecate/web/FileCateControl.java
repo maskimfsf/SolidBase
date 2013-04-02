@@ -101,6 +101,7 @@ public class FileCateControl {
 	@POST
 	public String doEdit(Map<String, Object> model) {
 		try {
+			model.put("mediaTypes", FileCate.mediaTypes());
 			model.put("pojo", service.get(id));
 		} catch (Exception e) {
 			return dwz.getFailedJson(e.getMessage()).toString();

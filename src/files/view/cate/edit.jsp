@@ -6,12 +6,17 @@
             <div class="pageFormContent" layoutH="58">
 				<input type="hidden" name="_method" value="put" />
 				<div class="unit">
+					<label>媒体类型：</label>
+					<select class="required " name="fileCate.mediaType">
+						<c:forEach var="item" items="${mediaTypes}">
+						<option value="${item}" <c:if test="${pojo.mediaType == item}">selected="selected"</c:if>>${item}</option>
+						</c:forEach>
+					</select>
+				</div>
+				
+				<div class="unit">
 					<label>类别名称：</label>
 					<input class="required " name="fileCate.name" value="${pojo.name}" />
-				</div>
-				<div class="unit">
-					<label>缩略图：</label>
-					<input class="required number" name="fileCate.thumb.id" value="${pojo.thumb.id}" />
 				</div>
 				
 				<div class="unit">

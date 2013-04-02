@@ -74,10 +74,10 @@ public class AreaControl {
 		return CommonUtil.toJson(areas);
 	}
 	
-	@Path("/image")
+	@Path("/canvas")
 	public String image(@QueryParam("savePath") String savePath){
 		MVC.ctx().getModel().put("savePath", savePath);
-		return "jsp:mapper/view/area/image.jsp";
+		return "jsp:mapper/view/area/canvas.jsp";
 	}
 	
 	@Path("/{id}/draw")

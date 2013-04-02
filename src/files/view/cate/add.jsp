@@ -6,12 +6,17 @@
             <div class="pageFormContent" layoutH="58">
 				
 				<div class="unit">
+					<label>媒体类型：</label>
+					<select class="required " name="fileCate.mediaType">
+						<c:forEach var="item" items="${mediaTypes}">
+						<option value="${item}">${item}</option>
+						</c:forEach>
+					</select>
+				</div>
+				
+				<div class="unit">
 					<label>类别名称：</label>
 					<input class="required " name="fileCate.name" />
-				</div>
-				<div class="unit">
-					<label>缩略图：</label>
-					<input class="required number" name="fileCate.thumb.id" />
 				</div>
 				
 				<div class="unit">
