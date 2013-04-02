@@ -61,7 +61,7 @@
 		<form action="${BaseURL}area/${area.id}/" method="POST" onsubmit="return validateCallback(this)">
 			<input type="hidden" name="_method" value="put" />
 			<div class="ui-layout-center">
-				<iframe name="area_image_iframe" width="100%" height="100%" src="${BaseURL}area/image?savePath=${area.mapper.image.savePath}"></iframe>
+				<iframe name="area_image_iframe" width="99%" height="99%" src="${BaseURL}area/image?savePath=${area.mapper.image.savePath}"></iframe>
 				<!--div id="user_image">
 					<img id="my_image" src="${ImageBaseURL}/${area.mapper.image.savePath}" />
 					<div id="myCanvas"></div>

@@ -26,7 +26,6 @@
 		<ul class="toolBar">
 			<li><a class="add" href="${BaseURL}${listPage.model}/new" rel="${listPage.model}_new" target="dialog" rel="xxx" title="添加"><span>添加</span></a></li>
 			<li><a class="edit" href="${BaseURL}${listPage.model}/{pojo_id}/edit" rel="${listPage.model}_edit" target="dialog" warn="请选择一条记录"><span>修改</span></a></li>
-			<li><a class="edit" href="${BaseURL}${listPage.model}/{pojo_id}/edit_draw" rel="${listPage.model}_edit_draw" target="navTab" external="true" reloadflag="1" warn="请选择一条记录"><span>画热点</span></a></li>
 			<li><a title="确定要删除吗？" warn="您没有选择任何项目！请选择列表中的数据，选中项将会以蓝色高亮显示！" 
 			target="selectedTodo" rel="ids" href="${BaseURL}${listPage.model}/batchRemove?_method=delete" class="delete"><span>删除</span></a></li>
 		</ul>
@@ -60,7 +59,6 @@
 				<td>
 					<a title="删除" target="ajaxTodo" href="${BaseURL}${listPage.model}/${dataItem.id }?_method=delete" class="btnDel">删除</a>
 					<a title="编辑mapper_${dataItem.id}" target="dialog" href="${BaseURL}${listPage.model}/${dataItem.id}/edit" rel="${listPage.model}_${dataItem.id}_edit" class="btnEdit">编辑</a>
-					<a title="画热点mapper_${dataItem.id}" target="navTab" href="${BaseURL}${listPage.model}/${dataItem.id}/edit_draw" rel="${listPage.model}_${dataItem.id}_edit_draw" external="true" reloadflag="1" class="btnEdit">画热点</a>
 				</td>
 			</tr>
 		</c:forEach>
