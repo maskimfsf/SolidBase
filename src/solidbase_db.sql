@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50045
 File Encoding         : 65001
 
-Date: 2013-04-02 21:21:10
+Date: 2013-04-02 23:34:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,14 +29,16 @@ CREATE TABLE `t_area` (
   PRIMARY KEY  (`id`),
   KEY `mapper_id` (`mapper_id`),
   CONSTRAINT `t_area_mapper_id` FOREIGN KEY (`mapper_id`) REFERENCES `t_mapper` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_area
 -- ----------------------------
-INSERT INTO `t_area` VALUES ('1', '性感的嘴唇', '387,517, 428,501, 467,500, 509,516, 470,548, 429,557, 386,527', 'orange', '性感的嘴唇', '6');
+INSERT INTO `t_area` VALUES ('1', '性感的嘴唇', '382,520, 429,498, 474,497, 515,515, 472,551, 424,559, 384,523', 'crimson', '性感的嘴唇', '6');
 INSERT INTO `t_area` VALUES ('2', '眼睛哦', '289,290, 304,291, 327,280, 358,280, 384,296, 396,315, 372,308, 349,312, 322,310, 295,295', 'fuchsia', '', '6');
 INSERT INTO `t_area` VALUES ('3', '手臂', '121,177, 116,189, 112,228, 103,246, 92,243, 87,232, 100,200, 110,166, 120,176', 'burlywood', '手臂', '7');
+INSERT INTO `t_area` VALUES ('6', '测试热点哦', '480,270, 465,318, 482,365, 504,413, 480,456', 'cyan', '测试热点哦', '6');
+INSERT INTO `t_area` VALUES ('7', 'test', '153,153, 133,174, 117,158, 124,145, 128,144, 133,145, 155,150', 'chartreuse', 'test222', '7');
 
 -- ----------------------------
 -- Table structure for `t_code`
@@ -177,7 +179,7 @@ CREATE TABLE `t_file_cate` (
   `thumb_id` bigint(20) default NULL,
   `sort` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_file_cate
@@ -1018,7 +1020,7 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('9', 'solidbase', '4c5531126fd5b96261ebb2637c299e34', '正常', '2013-04-02 18:44:47', '127.0.0.1', '2012-03-06 21:55:51', '2012-03-06 21:55:51', '2012-06-10 01:32:52', '演示账号', 'eweb4j@163.com', '', '中国广东', '', '', '', '', '', 'yes');
+INSERT INTO `t_user` VALUES ('9', 'solidbase', '4c5531126fd5b96261ebb2637c299e34', '正常', '2013-04-02 22:49:58', '127.0.0.1', '2012-03-06 21:55:51', '2012-03-06 21:55:51', '2012-06-10 01:32:52', '演示账号', 'eweb4j@163.com', '', '中国广东', '', '', '', '', '', 'yes');
 INSERT INTO `t_user` VALUES ('10', 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', '正常', '2013-03-29 18:51:27', '127.0.0.1', '2013-03-29 18:51:16', '2013-03-29 18:51:16', '2013-03-29 18:51:16', '匿名', '无', '无', null, null, null, null, null, null, 'no');
 
 -- ----------------------------
