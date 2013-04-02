@@ -80,6 +80,8 @@ public class FileCateControl {
 	@GET
 	@POST
 	public String doGet(Map<String, Object> model) {
+		model.put("mediaTypes", FileCate.mediaTypes());
+		
 		return "jsp:files/view/cate/add.jsp";
 	}
 	

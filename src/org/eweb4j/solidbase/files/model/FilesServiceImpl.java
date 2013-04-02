@@ -1,11 +1,13 @@
 package org.eweb4j.solidbase.files.model;
 
 import java.io.File;
+import java.util.Collection;
 
 import org.eweb4j.config.ConfigConstant;
 import org.eweb4j.mvc.view.PageMod;
 import org.eweb4j.orm.Db;
 import org.eweb4j.orm.Page;
+import org.eweb4j.solidbase.filecate.model.FileCate;
 import org.eweb4j.solidbase.setting.Setting;
 import org.eweb4j.util.CommonUtil;
 import org.eweb4j.util.FileUtil;
@@ -48,6 +50,8 @@ public class FilesServiceImpl implements FilesService{
 		FileUtil.copy(uploadFile, dst);
 		
 		files.setSavePath(savePath);
+		
+		//TODO add default category
 		
 		Db.ar(files).create();
 		
@@ -111,5 +115,19 @@ public class FilesServiceImpl implements FilesService{
 			throw new FilesException("not found");
 		
 		return pojo;
+	}
+
+	@Override
+	public Collection<Files> getAllImages() throws FilesException {
+		String mediaType = FileCate.MediaType.IMAGE.toString().toLowerCase();
+		return Db.ar(Files.class).dao()
+			.alias("f")
+			.join("cate", "c")
+			.select(Files.class)
+			.where()
+				.field("c.mediaType").equal(mediaType)
+				.enableExpress(true)
+				.and("c.id").equal("f.cate")
+			.query();
 	}
 }

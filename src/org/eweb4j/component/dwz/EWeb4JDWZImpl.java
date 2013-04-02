@@ -214,8 +214,7 @@ public class EWeb4JDWZImpl implements DWZ {
 	/**
 	 * 创建
 	 */
-	public String getAccordion(Long navMenuId, final boolean noAuth)
-			throws Exception {
+	public String getAccordion(Long navMenuId, final boolean noAuth) throws Exception {
 
 		boolean flag = false;
 

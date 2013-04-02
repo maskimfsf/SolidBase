@@ -52,10 +52,10 @@
 	<div id="jbsxBox3" class="unitBox" style="margin-left: 55%; height:50%;">
 		<div class="pageContent" style="border: 1px #B8D0D6 solid;" layoutH="360">
 			<ul class="tree treeFolder treeCheck expand">
-			    	<li><a>全部部门</a>
-			    		${departmentTree}
-			    	</li>
-			    </ul>
+		    	<li><a>全部部门</a>
+		    		${departmentTree}
+		    	</li>
+		    </ul>
 		</div>
 	</div>
 	

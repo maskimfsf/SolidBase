@@ -10,10 +10,33 @@ Target Server Type    : MYSQL
 Target Server Version : 50045
 File Encoding         : 65001
 
-Date: 2013-03-29 18:52:13
+Date: 2013-04-02 21:21:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `t_area`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_area`;
+CREATE TABLE `t_area` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `coords` varchar(255) default NULL,
+  `color` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `mapper_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `mapper_id` (`mapper_id`),
+  CONSTRAINT `t_area_mapper_id` FOREIGN KEY (`mapper_id`) REFERENCES `t_mapper` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_area
+-- ----------------------------
+INSERT INTO `t_area` VALUES ('1', '性感的嘴唇', '387,517, 428,501, 467,500, 509,516, 470,548, 429,557, 386,527', 'orange', '性感的嘴唇', '6');
+INSERT INTO `t_area` VALUES ('2', '眼睛哦', '289,290, 304,291, 327,280, 358,280, 384,296, 396,315, 372,308, 349,312, 322,310, 295,295', 'fuchsia', '', '6');
+INSERT INTO `t_area` VALUES ('3', '手臂', '121,177, 116,189, 112,228, 103,246, 92,243, 87,232, 100,200, 110,166, 120,176', 'burlywood', '手臂', '7');
 
 -- ----------------------------
 -- Table structure for `t_code`
@@ -135,12 +158,13 @@ CREATE TABLE `t_files` (
   PRIMARY KEY  (`id`),
   KEY `cate_id` (`cate_id`),
   CONSTRAINT `t_files_ibfk_1` FOREIGN KEY (`cate_id`) REFERENCES `t_file_cate` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_files
 -- ----------------------------
 INSERT INTO `t_files` VALUES ('11', '2013-03-29/E5FFD035464B3976484DC4AD008F940C.jpg', '6', '321.jpg', '', '0');
+INSERT INTO `t_files` VALUES ('12', '2013-04-02/134FE9A9AF2B152DEE7E5A60D128F57A.jpg', '6', '123.jpg', '', '0');
 
 -- ----------------------------
 -- Table structure for `t_file_cate`
@@ -149,6 +173,7 @@ DROP TABLE IF EXISTS `t_file_cate`;
 CREATE TABLE `t_file_cate` (
   `id` bigint(20) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL,
+  `media_type` varchar(32) default NULL,
   `thumb_id` bigint(20) default NULL,
   `sort` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
@@ -157,10 +182,32 @@ CREATE TABLE `t_file_cate` (
 -- ----------------------------
 -- Records of t_file_cate
 -- ----------------------------
-INSERT INTO `t_file_cate` VALUES ('6', 'image', '1', '0');
-INSERT INTO `t_file_cate` VALUES ('7', 'word文档', '3', '0');
-INSERT INTO `t_file_cate` VALUES ('8', 'excel', '11', '0');
-INSERT INTO `t_file_cate` VALUES ('9', 'txt文件', '0', '0');
+INSERT INTO `t_file_cate` VALUES ('6', 'image', 'image', '1', '0');
+INSERT INTO `t_file_cate` VALUES ('7', 'word文档', 'file', '3', '0');
+INSERT INTO `t_file_cate` VALUES ('8', 'excel', 'file', '11', '0');
+INSERT INTO `t_file_cate` VALUES ('9', 'txt文件', 'text', '0', '0');
+
+-- ----------------------------
+-- Table structure for `t_mapper`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_mapper`;
+CREATE TABLE `t_mapper` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `image_id` bigint(20) default NULL,
+  `width` int(8) default NULL,
+  `height` int(8) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `image_id` (`image_id`),
+  CONSTRAINT `t_mapper_image_id` FOREIGN KEY (`image_id`) REFERENCES `t_files` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_mapper
+-- ----------------------------
+INSERT INTO `t_mapper` VALUES ('6', '女孩_映射', '女孩_映射', '11', '0', '0');
+INSERT INTO `t_mapper` VALUES ('7', '女孩映射2', '', '12', '0', '0');
 
 -- ----------------------------
 -- Table structure for `t_nav_menu`
@@ -173,7 +220,7 @@ CREATE TABLE `t_nav_menu` (
   `RANK` int(11) NOT NULL default '0',
   PRIMARY KEY  (`ID`),
   UNIQUE KEY `NAME` (`NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_nav_menu
@@ -185,6 +232,8 @@ INSERT INTO `t_nav_menu` VALUES ('6', '数据采集', 'main/switchEnv/6', '3');
 INSERT INTO `t_nav_menu` VALUES ('8', '打开JSP', 'main/switchEnv/hello.jsp', '5');
 INSERT INTO `t_nav_menu` VALUES ('9', '打开HTML', 'main/switchEnv/hello.html', '4');
 INSERT INTO `t_nav_menu` VALUES ('15', '文件库', 'main/switchEnv/15', '0');
+INSERT INTO `t_nav_menu` VALUES ('16', '热点管理', 'main/switchEnv/16', '0');
+INSERT INTO `t_nav_menu` VALUES ('17', '画热点', 'mapper/tree', '0');
 
 -- ----------------------------
 -- Table structure for `t_permission`
@@ -872,7 +921,7 @@ CREATE TABLE `t_tree_menu` (
   KEY `PID` (`PID`),
   CONSTRAINT `t_tree_menu_ibfk_1` FOREIGN KEY (`NAV_MENU_ID`) REFERENCES `t_nav_menu` (`ID`) ON UPDATE CASCADE,
   CONSTRAINT `t_tree_menu_ibfk_2` FOREIGN KEY (`PID`) REFERENCES `t_tree_menu` (`ID`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=410 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=417 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_tree_menu
@@ -930,6 +979,12 @@ INSERT INTO `t_tree_menu` VALUES ('405', '所有类别', 'navTab', 'xssywjfl', '
 INSERT INTO `t_tree_menu` VALUES ('406', '添加文件类别', 'dialog', 'tjwjfl', '0', 'file_cate/new', '403', '0', '15', 'false', '500', '300');
 INSERT INTO `t_tree_menu` VALUES ('407', '显示所有文件', 'navTab', 'xssywj', '0', 'files/list', '404', '0', '15', 'false', '0', '0');
 INSERT INTO `t_tree_menu` VALUES ('408', '上传文件', 'dialog', 'scwj', '0', 'files/new', '404', '0', '15', 'false', '500', '300');
+INSERT INTO `t_tree_menu` VALUES ('409', '映射管理', 'navTab', '', '0', '', '1', '0', '16', 'false', '0', '0');
+INSERT INTO `t_tree_menu` VALUES ('410', '列出所有映射', 'navTab', 'xssytxys', '0', 'mapper/list', '409', '0', '16', 'false', '0', '0');
+INSERT INTO `t_tree_menu` VALUES ('411', '新增映射', 'dialog', 'xztxys', '0', 'mapper/new', '409', '0', '16', 'false', '500', '250');
+INSERT INTO `t_tree_menu` VALUES ('412', '热点管理', 'navTab', '', '0', '', '1', '0', '16', 'false', '0', '0');
+INSERT INTO `t_tree_menu` VALUES ('413', '列出所有热点', 'navTab', 'xssytxrd', '0', 'area/list', '412', '0', '16', 'false', '0', '0');
+INSERT INTO `t_tree_menu` VALUES ('414', '新增热点', 'dialog', 'xztxrd', '0', 'area/new', '412', '0', '16', 'false', '500', '300');
 
 -- ----------------------------
 -- Table structure for `t_user`
@@ -963,7 +1018,7 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('9', 'solidbase', '4c5531126fd5b96261ebb2637c299e34', '正常', '2013-03-29 18:40:15', '127.0.0.1', '2012-03-06 21:55:51', '2012-03-06 21:55:51', '2012-06-10 01:32:52', '演示账号', 'eweb4j@163.com', '', '中国广东', '', '', '', '', '', 'yes');
+INSERT INTO `t_user` VALUES ('9', 'solidbase', '4c5531126fd5b96261ebb2637c299e34', '正常', '2013-04-02 18:44:47', '127.0.0.1', '2012-03-06 21:55:51', '2012-03-06 21:55:51', '2012-06-10 01:32:52', '演示账号', 'eweb4j@163.com', '', '中国广东', '', '', '', '', '', 'yes');
 INSERT INTO `t_user` VALUES ('10', 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', '正常', '2013-03-29 18:51:27', '127.0.0.1', '2013-03-29 18:51:16', '2013-03-29 18:51:16', '2013-03-29 18:51:16', '匿名', '无', '无', null, null, null, null, null, null, 'no');
 
 -- ----------------------------

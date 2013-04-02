@@ -174,23 +174,17 @@ public class MainControl {
 	@POST
 	@Path("/switchEnv/{navMenuId}")
 	public String switchEnvHandler(Context context) {
-		String treeMenu = (String) context.getSession().getAttribute(
-				NavMenu.class.getName() + "_SWITCH_ENV_" + navMenuId);
-		User loginUser = (User) context.getRequest().getSession(true)
-				.getAttribute(UserCons.LOGIN_USER_ATTR_NAME());
+		String treeMenu = (String) context.getSession().getAttribute(NavMenu.class.getName() + "_SWITCH_ENV_" + navMenuId);
+		User loginUser = (User) context.getRequest().getSession(true).getAttribute(UserCons.LOGIN_USER_ATTR_NAME());
 		try {
 			/* 用户有超能力不采用缓存 */
 			if ("yes".equals(loginUser.getSuperPower())) {
 				treeMenu = dwz.getAccordion(navMenuId, true);
-				context.getSession().setAttribute(
-						NavMenu.class.getName() + "_SWITCH_ENV_" + navMenuId,
-						treeMenu);
+				context.getSession().setAttribute(NavMenu.class.getName() + "_SWITCH_ENV_" + navMenuId, treeMenu);
 			} else if (treeMenu == null) {
 				dwz.setTreeMenuPermissions(loginUser.getTreeMenuPerms());
 				treeMenu = dwz.getAccordion(navMenuId, false);
-				context.getSession().setAttribute(
-						NavMenu.class.getName() + "_SWITCH_ENV_" + navMenuId,
-						treeMenu);
+				context.getSession().setAttribute(NavMenu.class.getName() + "_SWITCH_ENV_" + navMenuId,treeMenu);
 			}
 
 			return String.format(format, treeMenu);
@@ -202,7 +196,7 @@ public class MainControl {
 	@GET
 	@POST
 	@Path("/switchEnv/{pageName}.html")
-	public String doSwitchPage1(Map<String, Object> model) {
+	public String doSwitchEnvToHtmlPage(Map<String, Object> model) {
 		model.put("switchEnvPath", pageName + ".html");
 		return "forward:main/view/switchEnv.jsp";
 	}
@@ -210,7 +204,7 @@ public class MainControl {
 	@GET
 	@POST
 	@Path("/switchEnv/{pageName}.jsp")
-	public String doSwitchPage2(Map<String, Object> model) {
+	public String doSwitchEnvToJSPPage(Map<String, Object> model) {
 		model.put("switchEnvPath", pageName + ".jsp");
 		return "forward:main/view/switchEnv.jsp";
 	}

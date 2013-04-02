@@ -23,6 +23,8 @@
 			<file id="ResourceConstant" path="resource/conf/resource.properties" global="false" />
 			<file id="FileCateConstant" path="files/conf/file_cate.properties" global="false" />
 			<file id="FilesConstant" path="files/conf/files.properties" global="false" />
+			<file id="MapperConstant" path="mapper/conf/mapper.properties" global="false" />
+			<file id="AreaConstant" path="mapper/conf/area.properties" global="false" />
 		</properties>
 		<ioc>
 			<open>1</open>
@@ -44,7 +46,7 @@
 			<logs>
 				<log console="1" level="info" file="logs/logs.log" size="5"/>
 			</logs>
-			<ddl generate="true" run="false" ds="myDBInfo"/>
+			<ddl generate="true" override="true" run="false" ds="myDBInfo"/>
 			<dataSource>com.mchange.v2.c3p0.ComboPooledDataSource</dataSource>
 			<scanPojoPackage>
 				<path>JAR:eweb4j-*</path>
