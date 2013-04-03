@@ -106,7 +106,7 @@ public class FilesServiceImpl implements FilesService{
 		if (files.getId() == null || files.getId() <= 0)
 			throw new FilesException("files not found");
 		
-		Db.ar(files).save();
+		Db.ar(files).save("cate", "displayName", "intro");
 	}
 
 	public Files get(Long id) throws FilesException {

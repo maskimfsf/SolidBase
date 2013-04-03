@@ -35,7 +35,7 @@
             <div class="pageFormContent" layoutH="104">
 				<div class="unit">
 					<label>文件类别：</label>
-					<select name="files.cate.id" class="combox">
+					<select name="files.cate.id" class="combox required">
 						<option value="">请选择</option>
 						<c:forEach var="item" items="${cates}">
 							<option value="${item.id}">${item.name}</option>

@@ -16,7 +16,9 @@ import org.eweb4j.component.dwz.DWZ;
 import org.eweb4j.component.dwz.DWZCons;
 import org.eweb4j.ioc.IOC;
 import org.eweb4j.mvc.MVC;
+import org.eweb4j.mvc.action.Validation;
 import org.eweb4j.mvc.config.MVCConfigConstant;
+import org.eweb4j.mvc.validator.annotation.Validate;
 import org.eweb4j.mvc.view.DataAssemUtil;
 import org.eweb4j.mvc.view.DivPageComp;
 import org.eweb4j.mvc.view.ListPage;
@@ -135,8 +137,12 @@ public class AreaControl {
 	
 	@Path("/")
 	@POST
-	public String doPost() {
+	@Validate({"area.name", "area.mapper"})
+	public String doPost(Validation val) {
 		try {
+			if (val.hasErr())
+				return dwz.getFailedJson(val.getAllErr().toString()).toString();
+			
 			areaService.create(area);
 			return dwz.getSuccessJson("create ok", "xssytxrd", MVCConfigConstant.BASE_URL+"mapper/list", "dialog", "热点管理").toString();
 		} catch (Exception e) {
@@ -161,8 +167,11 @@ public class AreaControl {
 	
 	@Path("/{id}")
 	@PUT
-	public String doPut() {
+	@Validate({"area.name", "area.mapper"})
+	public String doPut(Validation val) {
 		try {
+			if (val.hasErr())
+				return dwz.getFailedJson(val.getAllErr().toString()).toString();
 			area.setId(id);
 			areaService.update(area);
 			return dwz.getSuccessJson("update ok", "xssytxrd", MVCConfigConstant.BASE_URL+"area/list", "dialog", "热点管理").toString();

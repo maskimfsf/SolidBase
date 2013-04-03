@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.eweb4j.mvc.validator.annotation.Required;
 import org.eweb4j.solidbase.mapper.model.Mapper;
 
 /**
@@ -41,8 +42,10 @@ public class Area {
 	@Id
 	private Long id;
 	
+	@Required(mess="请填写热点名称")
 	private String name;//该区域的命名，例如KFC-01
 	
+	@Required(mess="请选择所属映射")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="mapper_id")
 	private Mapper mapper;

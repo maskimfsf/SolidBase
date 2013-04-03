@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50045
 File Encoding         : 65001
 
-Date: 2013-04-02 23:34:41
+Date: 2013-04-03 10:52:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `t_area` (
   PRIMARY KEY  (`id`),
   KEY `mapper_id` (`mapper_id`),
   CONSTRAINT `t_area_mapper_id` FOREIGN KEY (`mapper_id`) REFERENCES `t_mapper` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_area
@@ -37,8 +37,8 @@ CREATE TABLE `t_area` (
 INSERT INTO `t_area` VALUES ('1', '性感的嘴唇', '382,520, 429,498, 474,497, 515,515, 472,551, 424,559, 384,523', 'crimson', '性感的嘴唇', '6');
 INSERT INTO `t_area` VALUES ('2', '眼睛哦', '289,290, 304,291, 327,280, 358,280, 384,296, 396,315, 372,308, 349,312, 322,310, 295,295', 'fuchsia', '', '6');
 INSERT INTO `t_area` VALUES ('3', '手臂', '121,177, 116,189, 112,228, 103,246, 92,243, 87,232, 100,200, 110,166, 120,176', 'burlywood', '手臂', '7');
-INSERT INTO `t_area` VALUES ('6', '测试热点哦', '480,270, 465,318, 482,365, 504,413, 480,456', 'cyan', '测试热点哦', '6');
-INSERT INTO `t_area` VALUES ('7', 'test', '153,153, 133,174, 117,158, 124,145, 128,144, 133,145, 155,150', 'chartreuse', 'test222', '7');
+INSERT INTO `t_area` VALUES ('6', '左边眼睛', '504,314, 524,282, 565,277, 594,294, 509,315', 'cyan', '左边眼睛', '6');
+INSERT INTO `t_area` VALUES ('8', '0.-17', '327,151, 329,55, 383,56, 401,154, 388,204, 364,202, 362,148, 325,152', 'fuchsia', '454656456', '8');
 
 -- ----------------------------
 -- Table structure for `t_code`
@@ -160,13 +160,15 @@ CREATE TABLE `t_files` (
   PRIMARY KEY  (`id`),
   KEY `cate_id` (`cate_id`),
   CONSTRAINT `t_files_ibfk_1` FOREIGN KEY (`cate_id`) REFERENCES `t_file_cate` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_files
 -- ----------------------------
-INSERT INTO `t_files` VALUES ('11', '2013-03-29/E5FFD035464B3976484DC4AD008F940C.jpg', '6', '321.jpg', '', '0');
-INSERT INTO `t_files` VALUES ('12', '2013-04-02/134FE9A9AF2B152DEE7E5A60D128F57A.jpg', '6', '123.jpg', '', '0');
+INSERT INTO `t_files` VALUES ('11', '2013-03-29/E5FFD035464B3976484DC4AD008F940C.jpg', '6', '女孩_大图', '女孩_大图\n', '0');
+INSERT INTO `t_files` VALUES ('12', '2013-04-02/134FE9A9AF2B152DEE7E5A60D128F57A.jpg', '6', '女孩_小图', '女孩_小图\n', '0');
+INSERT INTO `t_files` VALUES ('13', '2013-04-03/79F3ED17BA2BF1BB0645287E5AE6D4C7.jpg', '6', '某商场平面图', '某商场平面图', '0');
+INSERT INTO `t_files` VALUES ('15', '2013-04-03/EF5D01E9C6AE403FAB6EF18696FEEEE2.png', '6', '美丽的花', '美丽的花', '70415');
 
 -- ----------------------------
 -- Table structure for `t_file_cate`
@@ -203,13 +205,14 @@ CREATE TABLE `t_mapper` (
   PRIMARY KEY  (`id`),
   KEY `image_id` (`image_id`),
   CONSTRAINT `t_mapper_image_id` FOREIGN KEY (`image_id`) REFERENCES `t_files` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_mapper
 -- ----------------------------
-INSERT INTO `t_mapper` VALUES ('6', '女孩_映射', '女孩_映射', '11', '0', '0');
-INSERT INTO `t_mapper` VALUES ('7', '女孩映射2', '', '12', '0', '0');
+INSERT INTO `t_mapper` VALUES ('6', '女孩_大图', '女孩_大图', '11', '0', '0');
+INSERT INTO `t_mapper` VALUES ('7', '女孩_小图', '', '12', '0', '0');
+INSERT INTO `t_mapper` VALUES ('8', '商场1', '商场1', '13', '0', '0');
 
 -- ----------------------------
 -- Table structure for `t_nav_menu`
@@ -222,7 +225,7 @@ CREATE TABLE `t_nav_menu` (
   `RANK` int(11) NOT NULL default '0',
   PRIMARY KEY  (`ID`),
   UNIQUE KEY `NAME` (`NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_nav_menu
@@ -923,7 +926,7 @@ CREATE TABLE `t_tree_menu` (
   KEY `PID` (`PID`),
   CONSTRAINT `t_tree_menu_ibfk_1` FOREIGN KEY (`NAV_MENU_ID`) REFERENCES `t_nav_menu` (`ID`) ON UPDATE CASCADE,
   CONSTRAINT `t_tree_menu_ibfk_2` FOREIGN KEY (`PID`) REFERENCES `t_tree_menu` (`ID`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=417 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=418 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_tree_menu
@@ -983,10 +986,10 @@ INSERT INTO `t_tree_menu` VALUES ('407', '显示所有文件', 'navTab', 'xssywj
 INSERT INTO `t_tree_menu` VALUES ('408', '上传文件', 'dialog', 'scwj', '0', 'files/new', '404', '0', '15', 'false', '500', '300');
 INSERT INTO `t_tree_menu` VALUES ('409', '映射管理', 'navTab', '', '0', '', '1', '0', '16', 'false', '0', '0');
 INSERT INTO `t_tree_menu` VALUES ('410', '列出所有映射', 'navTab', 'xssytxys', '0', 'mapper/list', '409', '0', '16', 'false', '0', '0');
-INSERT INTO `t_tree_menu` VALUES ('411', '新增映射', 'dialog', 'xztxys', '0', 'mapper/new', '409', '0', '16', 'false', '500', '250');
+INSERT INTO `t_tree_menu` VALUES ('411', '添加映射', 'dialog', 'xztxys', '0', 'mapper/new', '409', '0', '16', 'false', '500', '250');
 INSERT INTO `t_tree_menu` VALUES ('412', '热点管理', 'navTab', '', '0', '', '1', '0', '16', 'false', '0', '0');
 INSERT INTO `t_tree_menu` VALUES ('413', '列出所有热点', 'navTab', 'xssytxrd', '0', 'area/list', '412', '0', '16', 'false', '0', '0');
-INSERT INTO `t_tree_menu` VALUES ('414', '新增热点', 'dialog', 'xztxrd', '0', 'area/new', '412', '0', '16', 'false', '500', '300');
+INSERT INTO `t_tree_menu` VALUES ('414', '添加热点', 'dialog', 'xztxrd', '0', 'area/new', '412', '0', '16', 'false', '500', '300');
 
 -- ----------------------------
 -- Table structure for `t_user`
@@ -1020,8 +1023,8 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('9', 'solidbase', '4c5531126fd5b96261ebb2637c299e34', '正常', '2013-04-02 22:49:58', '127.0.0.1', '2012-03-06 21:55:51', '2012-03-06 21:55:51', '2012-06-10 01:32:52', '演示账号', 'eweb4j@163.com', '', '中国广东', '', '', '', '', '', 'yes');
-INSERT INTO `t_user` VALUES ('10', 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', '正常', '2013-03-29 18:51:27', '127.0.0.1', '2013-03-29 18:51:16', '2013-03-29 18:51:16', '2013-03-29 18:51:16', '匿名', '无', '无', null, null, null, null, null, null, 'no');
+INSERT INTO `t_user` VALUES ('9', 'solidbase', '4c5531126fd5b96261ebb2637c299e34', '正常', '2013-04-03 10:26:02', '127.0.0.1', '2012-03-06 21:55:51', '2012-03-06 21:55:51', '2012-06-10 01:32:52', '演示账号', 'eweb4j@163.com', '', '中国广东', '', '', '', '', '', 'yes');
+INSERT INTO `t_user` VALUES ('10', 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', '正常', '2013-04-03 10:22:19', '127.0.0.1', '2013-03-29 18:51:16', '2013-03-29 18:51:16', '2013-04-03 09:40:19', '匿名', '无', '无', '', '', '', '', '', '', 'no');
 
 -- ----------------------------
 -- Table structure for `t_user_activity_log`
@@ -1037,7 +1040,7 @@ CREATE TABLE `t_user_activity_log` (
   `USER_NAME` varchar(20) NOT NULL default '''佚名''',
   `USER_ACCOUNT` varchar(32) NOT NULL default '''匿名账号''',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=333 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=336 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_user_activity_log
@@ -1372,6 +1375,9 @@ INSERT INTO `t_user_activity_log` VALUES ('329', '10', '2013-03-29 18:51:40', '�
 INSERT INTO `t_user_activity_log` VALUES ('330', '10', '2013-03-29 18:51:40', '查看导航菜单列表', 'success', '', '匿名', 'demo');
 INSERT INTO `t_user_activity_log` VALUES ('331', '10', '2013-03-29 18:51:42', '编辑某导航菜单', 'false', '用户权限不足, 无法执行[编辑某导航菜单]功能', '匿名', 'demo');
 INSERT INTO `t_user_activity_log` VALUES ('332', '10', '2013-03-29 18:51:44', '访问添加导航菜单页面', 'false', '用户权限不足, 无法执行[访问添加导航菜单页面]功能', '匿名', 'demo');
+INSERT INTO `t_user_activity_log` VALUES ('333', '10', '2013-04-03 10:22:28', '访问系统设置页', 'false', '用户权限不足, 无法执行[访问系统设置页]功能', '匿名', 'demo');
+INSERT INTO `t_user_activity_log` VALUES ('334', '10', '2013-04-03 10:22:32', '退出后台', 'success', '', '匿名', 'demo');
+INSERT INTO `t_user_activity_log` VALUES ('335', '10', '2013-04-03 10:22:32', '退出后台', 'success', '', '匿名', 'demo');
 
 -- ----------------------------
 -- Table structure for `t_user_department`

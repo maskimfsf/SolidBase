@@ -34,7 +34,7 @@ public class Files {
 	
 	private String intro ;; // 文件简介
 	
-	private long size; // 文件大小
+	private Long size; // 文件大小
 
 	public Long getId() {
 		return this.id;
@@ -76,11 +76,11 @@ public class Files {
 		this.intro = intro;
 	}
 
-	public long getSize() {
+	public Long getSize() {
 		return this.size;
 	}
 
-	public void setSize(long size) {
+	public void setSize(Long size) {
 		this.size = size;
 	}
 	
