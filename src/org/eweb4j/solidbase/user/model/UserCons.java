@@ -53,7 +53,7 @@ public class UserCons {
 				: "closeCurrent";
 		callbackType = "reloadTab";
 		String mess = _mess == null ? "操作成功" : _mess;
-		String rel = map.get("ALLOC_ROLET.SHOW_LIST_REL");
+		String rel = map.get("ALLOC_ROLE.SHOW_LIST_REL");
 		String path = map.get("ALLOC_ROLE.SHOW_LIST_PATH");
 		path = MVCConfigConstant.BASE_URL + path;
 		String title = map.get("ALLOC_ROLE.SHOW_LIST_TITLE");
