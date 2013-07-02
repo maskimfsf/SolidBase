@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans>
+	<eweb4j>
+		<reload>0</reload>
+		<debug>1</debug>
+		<locales>
+			<locale language="zh" country="CN"/>
+		</locales>
+		<properties>
+			<file id="PreferenceConstant" path="modules/preference/conf/preference.properties" global="false" />
+			<file id="CodeConstant" path="modules/code/conf/code.properties" global="false" />
+			<file id="DWZConstant" path="modules/dwz/conf/dwz.properties" global="false" />
+			<file id="MenuConstant" path="modules/dwz/conf/menu.properties" global="false" />
+			<file id="NavMenuConstant" path="modules/dwz/conf/navmenu.properties" global="false" />
+			<file id="TreeMenuConstant" path="modules/dwz/conf/treemenu.properties" global="false" />
+			<file id="UserConstant" path="modules/user/conf/user.properties" global="false" />
+			<file id="RoleConstant" path="modules/role/conf/role.properties" global="false" />
+			<file id="MainConstant" path="modules/main/conf/main.properties" global="false" />
+			<file id="DepartmentConstant" path="modules/department/conf/department.properties" global="false" />
+			<file id="PermissionConstant" path="modules/permission/conf/permission.properties" global="false" />
+			<file id="UserActivityLogConstant" path="modules/user/conf/user-log.properties" global="false" />
+			<file id="ResourceConstant" path="modules/resource/conf/resource.properties" global="false" />
+			<file id="FileCateConstant" path="modules/files/conf/file_cate.properties" global="false" />
+			<file id="FilesConstant" path="modules/files/conf/files.properties" global="false" />
+			<file id="MapperConstant" path="modules/mapper/conf/mapper.properties" global="false" />
+			<file id="AreaConstant" path="modules/mapper/conf/area.properties" global="false" />
+			<file id="NoticeConstant" path="modules/notice/conf/notice.properties" global="false" />
+		</properties>
+		<ioc>
+			<open>1</open>
+			<logs>
+				<log console="1" level="debug" file="logs/logs.log" size="5"/>
+			</logs>
+			<iocXmlFiles>
+				<path>modules/permission/ioc/permission-ioc.xml</path>
+				<path>modules/department/ioc/department-ioc.xml</path>
+				<path>modules/code/ioc/code-ioc.xml</path>
+				<path>modules/user/ioc/user-ioc.xml</path>
+				<path>modules/role/ioc/role-ioc.xml</path>
+				<path>modules/dwz/ioc/dwz-ioc.xml</path>
+				<path>modules/resource/ioc/resource-ioc.xml</path>
+			</iocXmlFiles>
+		</ioc>
+		<orm>
+			<open>1</open>
+			<logs>
+				<log console="1" level="debug" file="logs/logs.log" size="5"/>
+			</logs>
+			<ddl generate="true" override="true" run="false" ds="myDBInfo"/>
+			<dataSource>com.mchange.v2.c3p0.ComboPooledDataSource</dataSource>
+			<scanPojoPackage>
+				<path>JAR:eweb4j-*</path>
+				<path>AP:${RootPath}/target/classes</path>
+				<path>org.eweb4j.solidbase</path>
+				<path>org.eweb4j.component.dwz.menu</path>
+			</scanPojoPackage>
+			<ormXmlFiles>
+				<path></path>
+			</ormXmlFiles>
+			<dbInfoXmlFiles>
+				<path>db.xml</path>
+			</dbInfoXmlFiles>
+		</orm>
+		<mvc>
+			<open>1</open>
+			<logs>
+				<log console="1" level="debug" file="logs/logs.log" size="5"/>
+			</logs>
+			<upload tmp="${RootPath}/WEB-INF/tmp" maxMemorySize="4M" maxRequestSize="4M"/>
+			<scanActionPackage>
+				<path>JAR:eweb4j-*</path>
+				<path>AP:${RootPath}/target/classes</path>
+				<path>org.eweb4j.solidbase</path>
+				<path>org.eweb4j.component.dwz.menu</path>
+			</scanActionPackage>
+			<scanInterceptorPackage>
+				<path>JAR:eweb4j-*</path>
+				<path>AP:${RootPath}/target/classes</path>
+				<path>org.eweb4j.solidbase</path>
+			</scanInterceptorPackage>
+			<actionXmlFiles>
+				<path></path>
+			</actionXmlFiles>
+			<interXmlFiles>
+				<path></path>
+			</interXmlFiles>
+		</mvc>
+	</eweb4j>
+</beans>

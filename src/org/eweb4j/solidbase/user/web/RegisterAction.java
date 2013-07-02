@@ -3,6 +3,7 @@ package org.eweb4j.solidbase.user.web;
 import java.util.Map;
 
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 import org.eweb4j.mvc.MVC;
 import org.eweb4j.mvc.action.Validation;
@@ -18,6 +19,12 @@ public class RegisterAction extends BaseAction {
 		return UserCons.REGISTER_ACTION_RESULT();
 	}
 
+	@Validate({ "user.*" })
+	@Produces("json")
+	public Object doTest(){
+		return MVC.ctx().getValidation().getAllErr();
+	}
+	
 	@Validate({ "user.authcode", "user.account", "user.password", "user.rePwd" })
 	public String doRegisterAtPost(Validation val, Map<String, Object> model) {
 		if (val.hasErr()){

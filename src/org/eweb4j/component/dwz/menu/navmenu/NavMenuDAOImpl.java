@@ -78,8 +78,9 @@ public class NavMenuDAOImpl implements NavMenuDAO {
 			Db.ar(navMenu,dsName).create();
 			
 			String href = navMenu.getHref();
-			if (!href.endsWith(".html") && !href.endsWith(".jsp"))
-				navMenu.setHref(NavMenuCons.DEFAULT_NAV_MENU_HREF().replace( "{id}", navMenu.getNavMenuId() + ""));
+			if (href.contains("{id}")){
+				navMenu.setHref(href.replace( "{id}", navMenu.getNavMenuId() + ""));
+			}
 			
 			Db.ar(navMenu,dsName).save("href");
 			

@@ -8,7 +8,7 @@ import org.eweb4j.mvc.view.CallBackJson;
 
 public class PermissionCons {
 	/**
-	 * 配置文件ID (在eweb4j框架启动培植文件中定义)
+	 * 配置文件ID (在eweb4j框架启动配置文件中定义)
 	 */
 	private final static String propId = "PermissionConstant";
 	private static Map<String, String> map = Props.getMap(propId);

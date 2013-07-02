@@ -13,8 +13,11 @@ import org.eweb4j.cache.Props;
 import org.eweb4j.component.dwz.DWZ;
 import org.eweb4j.component.dwz.DWZCons;
 import org.eweb4j.ioc.IOC;
+import org.eweb4j.mvc.action.Validation;
 import org.eweb4j.mvc.config.MVCConfigConstant;
 import org.eweb4j.mvc.upload.UploadFile;
+import org.eweb4j.mvc.validator.annotation.Upload;
+import org.eweb4j.mvc.validator.annotation.Validate;
 import org.eweb4j.mvc.view.DataAssemUtil;
 import org.eweb4j.mvc.view.DivPageComp;
 import org.eweb4j.mvc.view.ListPage;
@@ -40,6 +43,8 @@ public class FilesControl {
 	private Files files = null;
 	private Long id = null;
 	private Long[] ids = null;
+	
+	@Upload(suffix = { "jpg", "png" })
 	private UploadFile uploadFile = null;
 	
 	public void setPageNum(int pageNum) {
@@ -102,9 +107,13 @@ public class FilesControl {
 	
 	@Path("/upload")
 	@POST
-	public String doUpload() {
+	@Validate("uploadFile")
+	public String doUpload(Validation val) {
 		String fmt = "<script>parent.upload_callback('%s', %s);</script>";
 		try {
+			if (val.hasErr())
+				throw new FilesException(val.getAllErr().get("uploadFile").toString());
+			
 			File file = null;
 			if (uploadFile != null) {
 				file = uploadFile.getTmpFile();

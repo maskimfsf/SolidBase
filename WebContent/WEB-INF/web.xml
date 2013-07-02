@@ -16,12 +16,12 @@
 		<filter-class>org.eweb4j.mvc.EWebFilter</filter-class>
 		<init-param>
 			<param-name>StartFileName</param-name>
-			<param-value>start.xml</param-value>
+			<param-value>eweb4j.xml</param-value>
 		</init-param>
 		
 		<init-param>
 			<param-name>ConfigBasePath</param-name>
-			<param-value>${RootPath}/WEB-INF/classes/</param-value>
+			<param-value>${RootPath}/WEB-INF/</param-value>
 		</init-param>
 		
 		<init-param>
@@ -36,7 +36,7 @@
 		
 		<init-param>
 			<param-name>ForwardBasePath</param-name>
-			<param-value>/WEB-INF/classes/</param-value>
+			<param-value>/WEB-INF/modules/</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

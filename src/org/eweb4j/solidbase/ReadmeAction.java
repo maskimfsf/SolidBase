@@ -9,7 +9,7 @@ package org.eweb4j.solidbase;
 public class ReadmeAction {
 
 	public String doVersion(){
-		return "1.9.2-SNAPSHOT";
+		return "1.9.2";
 	}
 	
 }

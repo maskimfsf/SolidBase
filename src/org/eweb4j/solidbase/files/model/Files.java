@@ -32,7 +32,7 @@ public class Files {
 	@Column(name = "display_name")
 	private String displayName ;// 文件名字 
 	
-	private String intro ;; // 文件简介
+	private String intro ; // 文件简介
 	
 	private Long size; // 文件大小
 
